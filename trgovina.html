@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="sl"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trgovina — BlueCity Roleplay</title><meta name="description" content="Mesečni paketi in custom pedi."><meta name="theme-color" content="#060b16">
+<link rel="icon" type="image/png" href="logo.png"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Hanken+Grotesk:wght@300..700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css"><script src="theme.js"></script><link rel="stylesheet" href="extras.css"></head><body>
+<nav class="nav" id="nav"><div class="container"><div class="nav-inner"><a href="index.html" class="brand"><img src="logo.png" alt="BlueCity Roleplay"><span>BlueCity<em>Roleplay</em></span></a>
+<ul class="links"><li><a href="index.html">Domov</a></li><li><a href="trgovina.html">Trgovina</a></li><li><a href="ekipa.html">Ekipa</a></li><li><a href="pravila.html">Pravila</a></li></ul><a href="https://discord.gg/avyuUesWQm" class="btn btn-primary btn-sm" target="_blank" rel="noopener">Discord</a>
+<button class="menu-btn" id="menuBtn" aria-label="Meni"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button></div></div></nav>
+<div class="mobile" id="mobile"><a class="ml" href="index.html">Domov</a><a class="ml" href="trgovina.html">Trgovina</a><a class="ml" href="ekipa.html">Ekipa</a><a class="ml" href="pravila.html">Pravila</a><a class="btn btn-primary" style="margin-top:18px" href="https://discord.gg/avyuUesWQm" target="_blank" rel="noopener">Pridruži se Discordu</a></div>
+<section class="page-head"><div class="container"><div class="head reveal"><h1>Trgovina</h1><p>Pomagajte vzdrževati strežnik in odklenite ekskluzivne ugodnosti. Vse donacije so prostovoljne.</p></div></div></section><section id="donations"><div class="container">
+  <div class="sub-head reveal"><h3>Mesečni paketi</h3></div>
+  <div class="tiers" id="tiers"></div>
+  <div class="sub-head reveal"><h3>Custom pedi</h3><span class="sub-count" id="pedCount"></span></div>
+  <div class="toolbar reveal">
+    <label class="search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg><input id="pedSearch" type="search" placeholder="Poišči ped po imenu…" autocomplete="off" aria-label="Poišči ped"></label>
+    <label class="sort"><span>Razvrsti</span><select id="pedSort" aria-label="Razvrsti pede"><option value="">Priporočeno</option><option value="asc">Cena: nižja najprej</option><option value="desc">Cena: višja najprej</option><option value="az">Ime A–Z</option></select></label>
+  </div>
+  <div class="tiers peds-grid" id="pedGrid"></div>
+  <div class="ped-empty" id="pedEmpty" style="display:none">Noben ped ne ustreza iskanju. Poskusite drugo ime.</div>
+  <div class="more-wrap"><button class="btn btn-ghost" id="pedMore" style="display:none">Prikaži več pedov</button></div>
+  <div class="sub-head reveal"><h3>MLO in hiše</h3><span class="sub-count" id="mloCount"></span></div>
+  <div class="tiers peds-grid" id="mloGrid"></div>
+  <p class="disclaimer reveal">Donacije so popolnoma prostovoljne in pomagajo kriti stroške strežnika. Darovanje ne zagotavlja powergaming prednosti ali imunitete v vlogi. Vsi igralci so enaki v liku. Custom pedi, MLO in hiše so zgolj kozmetični oziroma zasebni prostori brez prednosti v igri.</p>
+</div></section>
+<footer><div class="container"><div class="f-grid">
+<div><img src="logo.png" alt=""><p>BlueCity Roleplay je FiveM roleplay strežnik z lastnimi sistemi in skupnostjo, ki igra skupaj.</p></div>
+<div><h4>Strani</h4><ul><li><a href="index.html">Domov</a></li><li><a href="trgovina.html">Trgovina</a></li><li><a href="ekipa.html">Ekipa</a></li><li><a href="pravila.html">Pravila</a></li></ul></div>
+<div><h4>Strežnik</h4><ul><li><a href="https://discord.gg/avyuUesWQm" target="_blank" rel="noopener">Discord</a></li><li>cfx.re/join/pgg7p3y</li><li>Igralcev: <span id="footerPlayers">0</span></li></ul></div></div>
+<div class="f-bottom"><span>© 2026 BlueCity Roleplay. Vse pravice pridržane.</span><span>Ni povezan z Rockstar Games ali Take-Two Interactive.</span></div></div></footer>
+<!-- Payment modal -->
+<div class="overlay" id="overlay" role="dialog" aria-modal="true" aria-labelledby="mTitle"><div class="modal">
+  <div class="m-top"><h3 id="mTitle">Dokončaj nakup</h3><button class="x" id="close" aria-label="Zapri"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg></button></div>
+  <div id="form">
+    <div class="sel"><b id="mName"></b><span id="mPrice"></span></div>
+    <div class="signed">Prijavljeni kot <b id="acctName"></b></div>
+    <div class="tabs"><button class="tab on" data-m="paypal">PayPal</button><button class="tab" data-m="paysafe">Paysafe</button></div>
+    <div class="pane on" data-p="paypal">
+      <div class="info">Pošljite plačilo prek <strong>PayPal Friends &amp; Family</strong> na:
+        <div class="copy-row"><span id="ppMail"></span><button class="btn btn-primary btn-sm" id="copyBtn" style="width:auto">Kopiraj</button></div>
+        Znesek: <strong id="ppAmt"></strong></div>
+      <div class="warn">Izberite <strong>Friends &amp; Family</strong>, ne Goods &amp; Services — ta plačila ne bodo sprejeta.</div>
+      <div class="fg"><label for="txId">PayPal ID transakcije (opcijsko)</label><input id="txId" placeholder="npr. 1AB23456CD789012E"></div>
+    </div>
+    <div class="pane" data-p="paysafe">
+      <div class="info">Vnesite <strong>16-mestno kodo</strong> Paysafe kartice. Znesek: <strong id="psAmt"></strong></div>
+      <div class="fg"><label for="psCode">Paysafe koda</label><input id="psCode" placeholder="XXXX XXXX XXXX XXXX" maxlength="19" inputmode="numeric" autocomplete="off"></div>
+    </div>
+    <div class="fg"><label for="email">E-poštni naslov (za potrditev)</label><input id="email" type="email" placeholder="vi@primer.com"></div>
+    <div class="fg"><label for="discord">Discord uporabniško ime</label><input id="discord" placeholder="uporabnik"></div>
+    <div class="fg" id="pedNote" style="display:none"><label for="pedText">Želeni ped (povezava ali opis)</label><textarea id="pedText" placeholder="Povežite referenco ali opišite, kako naj ped izgleda…"></textarea></div>
+    <button class="btn btn-primary" id="submit">Pošlji plačilo</button>
+  </div>
+  <div class="done-box" id="done" style="display:none">
+    <div class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>
+    <h3 style="font-family:var(--display)">Plačilo poslano</h3><p id="doneMsg"></p>
+    <div class="done-actions"><a class="btn btn-ghost" href="racun.html#orders">Moji nakupi</a><button class="btn btn-primary" id="closeDone">Zapri</button></div>
+  </div>
+</div></div>
+
+<script src="cms.js"></script><script src="auth.js"></script><script src="app.js"></script><script src="extras.js"></script></body></html>

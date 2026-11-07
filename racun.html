@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="sl"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Moj račun — BlueCity Roleplay</title><meta name="description" content="Profil, nakupi in nastavitve videza."><meta name="theme-color" content="#060b16">
+<link rel="icon" type="image/png" href="logo.png"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Hanken+Grotesk:wght@300..700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css"><script src="theme.js"></script><link rel="stylesheet" href="extras.css"></head><body>
+<nav class="nav" id="nav"><div class="container"><div class="nav-inner"><a href="index.html" class="brand"><img src="logo.png" alt="BlueCity Roleplay"><span>BlueCity<em>Roleplay</em></span></a>
+<ul class="links"><li><a href="index.html">Domov</a></li><li><a href="trgovina.html">Trgovina</a></li><li><a href="ekipa.html">Ekipa</a></li><li><a href="pravila.html">Pravila</a></li></ul><a href="https://discord.gg/avyuUesWQm" class="btn btn-primary btn-sm" target="_blank" rel="noopener">Discord</a>
+<button class="menu-btn" id="menuBtn" aria-label="Meni"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button></div></div></nav>
+<div class="mobile" id="mobile"><a class="ml" href="index.html">Domov</a><a class="ml" href="trgovina.html">Trgovina</a><a class="ml" href="ekipa.html">Ekipa</a><a class="ml" href="pravila.html">Pravila</a><a class="btn btn-primary" style="margin-top:18px" href="https://discord.gg/avyuUesWQm" target="_blank" rel="noopener">Pridruži se Discordu</a></div>
+<main class="acc-page"><div class="orb a"></div><div class="orb b"></div>
+<div class="container acc-wrap" id="accRoot" style="visibility:hidden">
+
+  <header class="acc-hero reveal">
+    <button class="acc-avatar" id="avBtn" aria-label="Spremeni profilno sliko" type="button">
+      <span class="acc-av-img" id="avBig"></span>
+      <span class="acc-cam"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg></span>
+    </button>
+    <input type="file" id="avFile" accept="image/png,image/jpeg,image/webp,image/gif" hidden>
+    <div class="acc-id">
+      <h1 id="hName"></h1>
+      <p><span id="hUser"></span><span class="sep">•</span><span id="hSince"></span></p>
+      <div class="acc-badges"><span class="stag" id="hDc"></span></div>
+    </div>
+  </header>
+
+  <nav class="acc-tabs reveal" style="--d:.05s" role="tablist" aria-label="Razdelki računa">
+    <span class="acc-ind"></span>
+    <button role="tab" data-t="profile" class="on" type="button">Profil</button>
+    <button role="tab" data-t="orders" type="button">Nakupi <i id="ordCount">0</i></button>
+    <button role="tab" data-t="settings" type="button">Videz</button>
+  </nav>
+
+  <!-- PROFIL -->
+  <section class="acc-sec on" data-s="profile">
+    <div class="acc-cols">
+      <form class="card acc-card" id="fProfile" novalidate>
+        <h3>Osebni podatki</h3>
+        <p class="hint">Prikazno ime vidite samo vi in ekipa ob naročilih.</p>
+        <div class="fg"><label for="pName">Prikazno ime</label><input id="pName" maxlength="24" autocomplete="nickname" placeholder="Kako naj vas kličemo?"></div>
+        <div class="two">
+          <div class="fg"><label for="pUser">Uporabniško ime</label><input id="pUser" disabled></div>
+          <div class="fg"><label for="pMail">E-pošta</label><input id="pMail" disabled></div>
+        </div>
+        <div class="f-err" role="alert"></div>
+        <div class="row-actions"><button class="btn btn-primary btn-sm" id="pSave" type="submit" disabled>Shrani spremembe</button></div>
+      </form>
+
+      <div class="card acc-card">
+        <h3>Profilna slika</h3>
+        <p class="hint">PNG, JPG, WebP ali GIF do 8 MB. Sliko lahko pred shranjevanjem prilagodite.</p>
+        <div class="av-row"><span class="av-prev" id="avPrev"></span>
+          <div class="av-btns"><button class="btn btn-ghost btn-sm" id="avPick" type="button">Naloži novo sliko</button><button class="btn btn-ghost btn-sm danger" id="avDel" type="button">Odstrani</button></div></div>
+      </div>
+
+      <div class="card acc-card span2">
+        <div class="dc-head"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.3 4.4A19.8 19.8 0 0 0 15.4 3l-.2.4c1.7.4 2.5 1 3.4 1.7a14.5 14.5 0 0 0-12.4 0c.9-.7 1.9-1.4 3.6-1.7L9.6 3a19.8 19.8 0 0 0-4.9 1.4C1.6 9 .8 13.5 1.2 18a19.9 19.9 0 0 0 6 3l1.3-2.1c-.7-.3-1.4-.6-2-1l.5-.4a14.2 14.2 0 0 0 12 0l.5.4c-.6.4-1.3.7-2 1l1.3 2.1a19.9 19.9 0 0 0 6-3c.5-5.2-.8-9.7-3.5-13.6zM8.5 15.3c-1.2 0-2.1-1.1-2.1-2.4s.9-2.4 2.1-2.4 2.2 1.1 2.1 2.4c0 1.3-.9 2.4-2.1 2.4zm7 0c-1.2 0-2.1-1.1-2.1-2.4s.9-2.4 2.1-2.4 2.2 1.1 2.1 2.4c0 1.3-.9 2.4-2.1 2.4z"/></svg><div><h3>Povezava z Discordom</h3><p class="hint" style="margin:0">Ekipa vas tako hitreje najde, ko preverja naročila.</p></div></div>
+        <div id="dcUnlinked"><form class="dc-form" id="fDc" novalidate><div class="fg"><label for="dcName">Discord uporabniško ime</label><input id="dcName" placeholder="npr. uporabnik" autocomplete="off"></div><button class="btn btn-primary btn-sm" type="submit">Poveži Discord</button></form><div class="f-err" id="dcErr" role="alert"></div></div>
+        <div id="dcLinked" style="display:none"><div class="dc-linked"><span class="stag ok">Povezano</span><b id="dcShow"></b><span class="hint" id="dcWhen" style="margin:0"></span></div><button class="btn btn-ghost btn-sm danger" id="dcUnlink" type="button">Prekini povezavo</button></div>
+        <p class="note">Ime vnesete ročno. Ekipa ga primerja z vašim Discord računom ob prvem naročilu.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- NAKUPI -->
+  <section class="acc-sec" data-s="orders">
+    <div class="stats3" id="ordStats"></div>
+    <div class="chips" id="ordFilter"><button class="on" data-f="all" type="button">Vse</button><button data-f="plan" type="button">Paketi</button><button data-f="ped" type="button">Pedi</button><button data-f="mlo" type="button">MLO</button></div>
+    <div id="ordList" class="ord-list"></div>
+    <div class="ord-empty" id="ordEmpty" style="display:none"><div class="ord-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></div><h3>Še ni nakupov</h3><p>Ko pošljete prvo plačilo, se bo prikazalo tukaj.</p><a class="btn btn-primary btn-sm" href="trgovina.html">V trgovino</a></div>
+    <p class="note">Status "V preverjanju" se spremeni, ko ekipa potrdi plačilo. Potrditev prejmete na e-pošto in Discord.</p>
+  </section>
+
+  <!-- VIDEZ -->
+  <section class="acc-sec" data-s="settings">
+    <div class="card acc-card">
+      <h3>Tema</h3><p class="hint">Izberite svetlo ali temno ozadje ali sledite nastavitvi naprave.</p>
+      <div class="theme-pick" id="thPick">
+        <button data-v="dark" type="button"><span class="mini dk"><i></i><i></i><i></i></span>Temno</button>
+        <button data-v="light" type="button"><span class="mini lt"><i></i><i></i><i></i></span>Svetlo</button>
+        <button data-v="system" type="button"><span class="mini sy"><i></i><i></i><i></i></span>Sistem</button>
+      </div>
+    </div>
+    <div class="card acc-card">
+      <h3>Poudarna barva</h3><p class="hint">Barva gumbov, povezav in svetlobnih učinkov na vsej strani.</p>
+      <div class="acc-sw" id="swPick"></div>
+    </div>
+    <div class="card acc-card">
+      <h3>Animacije</h3><p class="hint">Zmanjšane animacije izklopijo lebdeče kristale, delce in prehode. Priporočeno za starejše naprave.</p>
+      <div class="seg" id="motPick"><button data-v="full" type="button">Polne</button><button data-v="reduced" type="button">Zmanjšane</button></div>
+    </div>
+    <div class="row-actions between"><span class="hint" style="margin:0">Nastavitve se shranijo na tej napravi in veljajo takoj.</span><button class="btn btn-ghost btn-sm" id="thReset" type="button">Ponastavi</button></div>
+  </section>
+</div>
+
+<!-- Crop dialog -->
+<div class="overlay" id="cropOv"><div class="modal crop-modal" role="dialog" aria-modal="true" aria-label="Prilagodi sliko">
+  <h3 style="font-family:var(--display);margin-bottom:6px">Prilagodi sliko</h3><p class="hint">Povlecite sliko in uporabite drsnik za povečavo.</p>
+  <div class="crop-stage"><canvas id="cropCv" width="280" height="280"></canvas><span class="crop-ring"></span></div>
+  <input type="range" id="cropZoom" min="1" max="3" step="0.01" value="1" aria-label="Povečava">
+  <div class="row-actions between"><button class="btn btn-ghost btn-sm" id="cropCancel" type="button">Prekliči</button><button class="btn btn-primary btn-sm" id="cropSave" type="button">Shrani sliko</button></div>
+</div></div>
+</main>
+<footer><div class="container"><div class="f-grid">
+<div><img src="logo.png" alt=""><p>BlueCity Roleplay je FiveM roleplay strežnik z lastnimi sistemi in skupnostjo, ki igra skupaj.</p></div>
+<div><h4>Strani</h4><ul><li><a href="index.html">Domov</a></li><li><a href="trgovina.html">Trgovina</a></li><li><a href="ekipa.html">Ekipa</a></li><li><a href="pravila.html">Pravila</a></li></ul></div>
+<div><h4>Strežnik</h4><ul><li><a href="https://discord.gg/avyuUesWQm" target="_blank" rel="noopener">Discord</a></li><li>cfx.re/join/pgg7p3y</li><li>Igralcev: <span id="footerPlayers">0</span></li></ul></div></div>
+<div class="f-bottom"><span>© 2026 BlueCity Roleplay. Vse pravice pridržane.</span><span>Ni povezan z Rockstar Games ali Take-Two Interactive.</span></div></div></footer>
+<script src="cms.js"></script><script src="auth.js"></script><script src="app.js"></script><script src="racun.js"></script><script src="extras.js"></script></body></html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="sl"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prijava — BlueCity Roleplay</title><meta name="description" content="Prijava in registracija za nakupe v trgovini."><meta name="theme-color" content="#060b16">
+<link rel="icon" type="image/png" href="logo.png"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Hanken+Grotesk:wght@300..700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css"><script src="theme.js"></script><link rel="stylesheet" href="extras.css"></head><body>
+<nav class="nav" id="nav"><div class="container"><div class="nav-inner"><a href="index.html" class="brand"><img src="logo.png" alt="BlueCity Roleplay"><span>BlueCity<em>Roleplay</em></span></a>
+<ul class="links"><li><a href="index.html">Domov</a></li><li><a href="trgovina.html">Trgovina</a></li><li><a href="ekipa.html">Ekipa</a></li><li><a href="pravila.html">Pravila</a></li></ul><a href="https://discord.gg/avyuUesWQm" class="btn btn-primary btn-sm" target="_blank" rel="noopener">Discord</a>
+<button class="menu-btn" id="menuBtn" aria-label="Meni"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button></div></div></nav>
+<div class="mobile" id="mobile"><a class="ml" href="index.html">Domov</a><a class="ml" href="trgovina.html">Trgovina</a><a class="ml" href="ekipa.html">Ekipa</a><a class="ml" href="pravila.html">Pravila</a><a class="btn btn-primary" style="margin-top:18px" href="https://discord.gg/avyuUesWQm" target="_blank" rel="noopener">Pridruži se Discordu</a></div>
+<main class="auth-page"><div class="orb a"></div><div class="orb b"></div><div class="container auth-grid">
+  <aside class="auth-side reveal">
+    <img src="logo.png" alt="">
+    <h1>Račun BlueCity Roleplay</h1>
+    <p>En račun za vse nakupe. Nakupe lahko opravite šele, ko ste prijavljeni.</p>
+    <ul>
+      <li><span>1</span>Ustvarite račun ali se prijavite</li>
+      <li><span>2</span>Izberite paket ali ped</li>
+      <li><span>3</span>Pošljite plačilo, ekipa ga preveri</li>
+    </ul>
+  </aside>
+  <div class="auth-card reveal" style="--d:.1s">
+    <div class="buy-note" id="buyNote" style="display:none">Za nakup se morate prijaviti. Po prijavi nadaljujete tam, kjer ste ostali.</div>
+    <div id="already" style="display:none;text-align:center"><div class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div><h3 style="font-family:var(--display);margin-bottom:8px">Že ste prijavljeni</h3><p style="color:var(--muted);margin-bottom:22px">Prijavljeni ste kot <b id="alreadyName"></b>.</p><a class="btn btn-primary" href="trgovina.html">V trgovino</a></div>
+    <div id="authForms">
+      <h2 id="authTitle" class="auth-title">Prijava</h2>
+      <div class="a-tabs" role="tablist"><span class="a-ind"></span><button class="a-tab on" data-t="in" role="tab" aria-selected="true" type="button">Prijava</button><button class="a-tab" data-t="up" role="tab" aria-selected="false" type="button">Nov račun</button></div>
+
+      <div class="a-pane on" data-p="in">
+        <form id="formIn" novalidate>
+          <div class="fg"><label for="inId">Uporabniško ime ali e-pošta</label><input id="inId" name="id_" autocomplete="username"></div>
+          <div class="fg"><label for="inPass">Geslo</label><div class="pw"><input id="inPass" name="pass" type="password" autocomplete="current-password"><button type="button" class="eye" aria-label="Pokaži geslo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button></div></div>
+          <label class="check"><input type="checkbox" name="remember" checked><span>Ostani prijavljen na tej napravi</span></label>
+          <div class="f-err" role="alert"></div>
+          <button class="btn btn-primary" type="submit">Prijava</button>
+          <p class="switch">Nimate računa? <a href="#" data-go="up">Ustvarite ga</a></p>
+        </form>
+      </div>
+
+      <div class="a-pane" data-p="up">
+        <form id="formUp" novalidate>
+          <div class="two"><div class="fg"><label for="upUser">Uporabniško ime</label><input id="upUser" name="user" autocomplete="username"></div>
+          <div class="fg"><label for="upDc">Discord <em>(opcijsko)</em></label><input id="upDc" name="discord" placeholder="uporabnik" autocomplete="off"></div></div>
+          <div class="fg"><label for="upMail">E-pošta</label><input id="upMail" name="email" type="email" autocomplete="email"></div>
+          <div class="fg"><label for="upPass">Geslo</label><div class="pw"><input id="upPass" name="pass" type="password" autocomplete="new-password"><button type="button" class="eye" aria-label="Pokaži geslo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button></div>
+            <div class="meter-row"><div class="meter" id="meter" data-s="0"><i></i><i></i><i></i><i></i></div><span id="meterTxt"></span></div></div>
+          <div class="fg"><label for="upPass2">Ponovite geslo</label><input id="upPass2" name="pass2" type="password" autocomplete="new-password"></div>
+          <label class="check"><input type="checkbox" name="terms"><span>Strinjam se s <a href="pravila.html">pravili strežnika</a> in da so donacije prostovoljne.</span></label>
+          <div class="f-err" role="alert"></div>
+          <button class="btn btn-primary" type="submit">Ustvari račun</button>
+          <p class="switch">Že imate račun? <a href="#" data-go="in">Prijavite se</a></p>
+        </form>
+      </div>
+    </div>
+  </div>
+</div></main>
+<footer><div class="container"><div class="f-grid">
+<div><img src="logo.png" alt=""><p>BlueCity Roleplay je FiveM roleplay strežnik z lastnimi sistemi in skupnostjo, ki igra skupaj.</p></div>
+<div><h4>Strani</h4><ul><li><a href="index.html">Domov</a></li><li><a href="trgovina.html">Trgovina</a></li><li><a href="ekipa.html">Ekipa</a></li><li><a href="pravila.html">Pravila</a></li></ul></div>
+<div><h4>Strežnik</h4><ul><li><a href="https://discord.gg/avyuUesWQm" target="_blank" rel="noopener">Discord</a></li><li>cfx.re/join/pgg7p3y</li><li>Igralcev: <span id="footerPlayers">0</span></li></ul></div></div>
+<div class="f-bottom"><span>© 2026 BlueCity Roleplay. Vse pravice pridržane.</span><span>Ni povezan z Rockstar Games ali Take-Two Interactive.</span></div></div></footer>
+<script src="cms.js"></script><script src="auth.js"></script><script src="app.js"></script><script src="extras.js"></script></body></html>
