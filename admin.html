@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Admin — BlueCity Roleplay</title><link rel="icon" href="logo.png"><meta name="robots" content="noindex">
+<style>
+:root{--bg:#05070c;--p:#0c121d;--l:rgba(120,210,255,.16);--t:#e8f1fb;--m:#8ea3bb;--a:#39dbff;--b:#0993ef;--r:#ff5c7a;--g:#4ade80}
+*{box-sizing:border-box;margin:0}body{font:14px/1.5 system-ui,Segoe UI,sans-serif;background:var(--bg);color:var(--t);min-height:100vh}
+button,input,textarea,select{font:inherit;color:inherit}
+input,textarea{width:100%;background:#070b13;border:1px solid var(--l);border-radius:10px;padding:9px 11px;outline:none}
+input:focus,textarea:focus{border-color:var(--a)}textarea{min-height:70px;resize:vertical}
+label{display:block;font-size:12px;color:var(--m);margin:10px 0 4px}
+.btn{background:linear-gradient(135deg,var(--a),var(--b));color:#03101c;font-weight:700;border:0;border-radius:10px;padding:9px 16px;cursor:pointer}
+.btn.g{background:#ffffff0d;color:var(--t);border:1px solid var(--l);font-weight:500}.btn.d{background:#ff5c7a22;color:var(--r);border:1px solid #ff5c7a55}.btn.s{padding:5px 10px;font-size:12px}
+#login{display:grid;place-items:center;min-height:100vh}#login form{width:340px;background:var(--p);border:1px solid var(--l);border-radius:18px;padding:28px}
+#login img{width:64px;display:block;margin:0 auto 10px}#login h2{text-align:center;margin-bottom:6px}
+#app{display:none;grid-template-columns:220px 1fr;min-height:100vh}
+aside{background:var(--p);border-right:1px solid var(--l);padding:18px 12px;position:sticky;top:0;height:100vh;overflow:auto}
+aside .br{display:flex;align-items:center;gap:10px;font-weight:700;margin-bottom:18px}aside .br img{width:32px}
+aside button{display:block;width:100%;text-align:left;background:0;border:0;border-radius:9px;padding:9px 12px;color:var(--m);cursor:pointer}
+aside button:hover{background:#ffffff0a;color:var(--t)}aside button.on{background:rgba(57,219,255,.12);color:var(--a)}
+main{padding:24px 28px 90px;max-width:980px}
+.bar{position:sticky;top:0;z-index:5;display:flex;gap:10px;align-items:center;justify-content:space-between;background:#05070ce6;backdrop-filter:blur(10px);padding:12px 0;margin-bottom:10px;border-bottom:1px solid var(--l)}
+.item{background:var(--p);border:1px solid var(--l);border-radius:14px;padding:14px 16px;margin:12px 0}
+.item h4{display:flex;justify-content:space-between;align-items:center;gap:8px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:0 14px}
+.full{grid-column:1/-1}.row{display:flex;gap:8px;align-items:center}.chk{display:flex;gap:8px;align-items:center;margin-top:26px;color:var(--t);font-size:13px}.chk input{width:auto}
+.img{display:flex;gap:10px;align-items:center}.img .th{width:64px;height:64px;border-radius:10px;background:#070b13 center/cover;border:1px solid var(--l);flex:none}
+.lib{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:10px;margin-top:12px}.lib div{position:relative;aspect-ratio:1;border-radius:10px;background:center/cover;border:1px solid var(--l);cursor:pointer}
+.lib div:hover{border-color:var(--a)}.lib .x{position:absolute;top:4px;right:4px;background:#000a;border-radius:6px;padding:0 6px}
+#modal{position:fixed;inset:0;background:#000b;display:none;place-items:center;z-index:50}#modal>div{background:var(--p);border:1px solid var(--l);border-radius:16px;padding:20px;width:min(720px,92vw);max-height:80vh;overflow:auto}
+#toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--p);border:1px solid var(--a);padding:10px 18px;border-radius:12px;display:none;z-index:60}
+.tag{font-size:11px;padding:2px 8px;border-radius:99px;background:rgba(57,219,255,.14);color:var(--a)}.note{color:var(--m);font-size:13px;margin:6px 0 14px}
+table{width:100%;border-collapse:collapse}td{padding:8px;border-bottom:1px solid var(--l)}
+@media(max-width:760px){#app{grid-template-columns:1fr}aside{position:static;height:auto;display:flex;flex-wrap:wrap;gap:4px}aside button{width:auto}.grid{grid-template-columns:1fr}}
+</style></head><body>
+<div id="login"><form id="lf"><img src="logo.png" alt=""><h2>Admin panel</h2><p class="note" style="text-align:center">Owners &amp; developers only</p>
+<label>Username</label><input name="u" autocomplete="username" required><label>Password</label><input name="p" type="password" autocomplete="current-password" required>
+<p id="le" style="color:var(--r);min-height:20px;margin:8px 0"></p><button class="btn" style="width:100%">Sign in</button></form></div>
+<div id="app"><aside><div class="br"><img src="logo.png" alt="">BlueCity Admin</div><nav id="nav"></nav><hr style="border:0;border-top:1px solid var(--l);margin:14px 0">
+<button onclick="open('/','_blank')">↗ View website</button><button onclick="logout()">Sign out</button><p class="note" id="who" style="padding:0 12px"></p></aside>
+<main><div class="bar"><b id="ttl"></b><div class="row"><span id="dirty" class="tag" style="display:none">Unsaved changes</span><button class="btn" id="save">Save &amp; publish</button></div></div><div id="view"></div></main></div>
+<div id="modal"><div id="mb"></div></div><div id="toast"></div>
+<script>
+const $=s=>document.querySelector(s),e=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const api=async(u,o={})=>{const r=await fetch(u,{credentials:'same-origin',...o});const j=await r.json().catch(()=>({}));if(!r.ok)throw Object.assign(new Error(j.error||r.status),{status:r.status});return j};
+const say=m=>{const t=$('#toast');t.textContent=m;t.style.display='block';clearTimeout(say.t);say.t=setTimeout(()=>t.style.display='none',2600)};
+let C={},L={},cur='settings',dirty=false;
+const mark=v=>{dirty=v;$('#dirty').style.display=v?'':'none'};addEventListener('beforeunload',x=>{if(dirty){x.preventDefault();x.returnValue=''}});
+
+/* ---- field schemas ---- */
+const T=(k,l,t='text',x={})=>({k,l,t,...x});
+const lines=a=>(a||[]).join('\n'),unl=s=>String(s||'').split('\n').map(x=>x.trim()).filter(Boolean);
+const S={
+ settings:{label:'⚙ Settings',single:true,note:'Core site settings. The Discord webhook is private and never sent to visitors.',fields:[T('connectUrl','FiveM connect link'),T('maxPlayers','Max players','number'),T('playerApi','Live player API URL (players.json)',  'text',{full:1}),T('paypalEmail','PayPal email'),T('purchaseWebhook','Discord order webhook (private)','password',{full:1}),T('purchasePingUserId','Discord user ID to ping on orders'),T('ann_on','Show announcement bar','bool'),T('ann','Announcement text','text',{full:1})]},
+ donations:{label:'💎 Packages',note:'Monthly supporter tiers. "ID" must be unique and lowercase (e.g. bronze).',fields:[T('id','ID'),T('name','Name'),T('price','Price (text, e.g. €9.99)'),T('period','Period'),T('tag','Badge'),T('featured','Featured card','bool'),T('blurb','Description','text',{full:1}),T('perks','Perks (one per line)','area',{full:1})],blank:{id:'new',name:'New package',price:'€0.00',period:'/ mesec',tag:'New',blurb:'',perks:''}},
+ peds:{label:'🧍 Peds',fields:[T('id','ID'),T('name','Name'),T('price','Price (€)','number'),T('preview','Preview link (YouTube)'),T('photo','Photo','img',{full:1}),T('blurb','Description','text',{full:1}),T('featured','Featured card','bool')],blank:{id:'new-ped',name:'New ped',price:35,photo:'',preview:'',blurb:'Custom ped model, narejen po meri.',featured:false}},
+ mlos:{label:'🏠 MLOs / Houses',fields:[T('id','ID'),T('name','Name'),T('price','Price (€)','number'),T('photo','Photo','img',{full:1}),T('blurb','Description','text',{full:1}),T('range','Buyer picks amount (slider)','bool'),T('min','Slider min','number'),T('max','Slider max','number')],blank:{id:'new-mlo',name:'New MLO',price:30,photo:'',blurb:'',range:false}},
+ staff:{label:'👥 Team',fields:[T('name','Name'),T('role','Role'),T('desc','Description','text',{full:1}),T('avatar','Photo','img',{full:1})],blank:{name:'Name',role:'Moderator',desc:'',avatar:''}},
+ features:{label:'✨ Home features',fields:[T('title','Title'),T('text','Text','area',{full:1})],blank:{title:'New feature',text:''}},
+ rules:{label:'📜 Rule cards',note:'Icon is an SVG path (optional, keep the default if unsure).',fields:[T('title','Title'),T('text','Text','area',{full:1}),T('icon','Icon SVG path','text',{full:1})],blank:{title:'New rule',text:'',icon:'M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20zM12 8v4M12 16h.01'}},
+ perks:{label:'🎁 Shop perks',single:true,note:'Bullet points shown on ped / MLO cards.',fields:[T('mloPerks','MLO perks (one per line)','area',{full:1}),T('pedPerks','Ped perks (one per line)','area',{full:1})]}
+};
+const GET={
+ settings:()=>[{...C,ann_on:!!C.settings?.announcementOn,ann:C.settings?.announcement||''}],
+ donations:()=>Object.entries(C.donations||{}).map(([id,p])=>({id,...p,perks:lines(p.perks)})),
+ peds:()=>structuredClone(C.peds||[]),mlos:()=>structuredClone(C.mlos||[]),staff:()=>structuredClone(C.staff||[]),
+ features:()=>(C.features||[]).map(f=>({title:f[1],text:f[2]})),rules:()=>(C.rules||[]).map(f=>({icon:f[0],title:f[1],text:f[2]})),
+ perks:()=>[{mloPerks:lines(C.mloPerks),pedPerks:lines(C.pedPerks)}]
+};
+const SET={
+ settings:a=>{const s=a[0];['connectUrl','playerApi','paypalEmail','purchaseWebhook','purchasePingUserId'].forEach(k=>C[k]=s[k]??'');C.maxPlayers=+s.maxPlayers||64;C.settings={...C.settings,announcementOn:!!s.ann_on,announcement:s.ann||''}},
+ donations:a=>C.donations=Object.fromEntries(a.map(p=>{const{id,...r}=p;return[(id||'x').toLowerCase().replace(/[^a-z0-9_-]/g,''),{...r,perks:unl(r.perks)}]})),
+ peds:a=>C.peds=a,mlos:a=>C.mlos=a,staff:a=>C.staff=a,
+ features:a=>C.features=a.map(f=>['',f.title,f.text]),rules:a=>C.rules=a.map(f=>[f.icon,f.title,f.text]),
+ perks:a=>{C.mloPerks=unl(a[0].mloPerks);C.pedPerks=unl(a[0].pedPerks)}
+};
+const flush=()=>Object.keys(S).forEach(k=>L[k]&&SET[k](L[k]));
+
+/* ---- rendering ---- */
+function field(k,i,f){const v=L[k][i][f.k],id=`${k}.${i}.${f.k}`,c=f.full?' full':'';
+ if(f.t==='bool')return`<label class="chk${c}"><input type="checkbox" data-f="${id}" ${v?'checked':''}> ${e(f.l)}</label>`;
+ if(f.t==='area')return`<div class="${c}"><label>${e(f.l)}</label><textarea data-f="${id}">${e(v)}</textarea></div>`;
+ if(f.t==='img')return`<div class="${c}"><label>${e(f.l)}</label><div class="img"><div class="th" style="background-image:url('${e(v)}')"></div><input data-f="${id}" value="${e(v)}" placeholder="/uploads/… or any image URL"><button class="btn g s" onclick="upload('${id}')">Upload</button><button class="btn g s" onclick="pick('${id}')">Library</button></div></div>`;
+ return`<div class="${c}"><label>${e(f.l)}</label><input type="${f.t}" data-f="${id}" value="${e(v)}"></div>`}
+function listView(k){const s=S[k];let h=s.note?`<p class="note">${s.note}</p>`:'';
+ L[k].forEach((it,i)=>{h+=`<div class="item"><h4><span>${s.single?'':`<span class="tag">#${i+1}</span> `}<b>${e(it.name||it.title||it.id||'')}</b></span>${s.single?'':`<span class="row"><button class="btn g s" onclick="mv('${k}',${i},-1)">↑</button><button class="btn g s" onclick="mv('${k}',${i},1)">↓</button><button class="btn d s" onclick="del('${k}',${i})">Delete</button></span>`}</h4><div class="grid">${s.fields.map(f=>field(k,i,f)).join('')}</div></div>`});
+ if(!s.single)h+=`<button class="btn g" onclick="add('${k}')">＋ Add new</button>`;return h}
+const view={
+ media:async()=>{const u=await api('/api/admin/uploads');return`<p class="note">All images uploaded through the panel. Click one to copy its link.</p><button class="btn" onclick="upload()">Upload image</button><div class="lib">${u.map(x=>`<div style="background-image:url('${e(x)}')" onclick="navigator.clipboard.writeText('${e(x)}');say('Link copied')"><span class="x" onclick="event.stopPropagation();rm('${e(x)}')">✕</span></div>`).join('')||'<p class="note">No uploads yet.</p>'}</div>`},
+ users:async()=>{const u=await api('/api/admin/users');return`<p class="note">Owners and developers both have full access. Adding an existing username resets its password.</p><div class="item"><table>${u.map(x=>`<tr><td><b>${e(x.username)}</b></td><td><span class="tag">${x.role}</span></td><td align="right"><button class="btn d s" onclick="delUser('${e(x.username)}')">Remove</button></td></tr>`).join('')}</table></div><div class="item"><h4>Add / update account</h4><div class="grid"><div><label>Username</label><input id="nu"></div><div><label>Password (8+)</label><input id="np" type="password"></div><div><label>Role</label><select id="nr" style="width:100%;background:#070b13;border:1px solid var(--l);border-radius:10px;padding:9px"><option>developer</option><option>owner</option></select></div></div><br><button class="btn" onclick="addUser()">Save account</button></div>`},
+ json:async()=>{flush();return`<p class="note">Developer mode: raw content JSON. Edit carefully, then Save &amp; publish.</p><textarea id="raw" style="min-height:60vh;font-family:monospace;font-size:12px">${e(JSON.stringify(C,null,2))}</textarea><br><br><button class="btn g" onclick="try{C=JSON.parse($('#raw').value);Object.keys(S).forEach(k=>L[k]=GET[k]());mark(true);say('Applied — now Save')}catch(x){say('Invalid JSON')}">Apply JSON</button>`}
+};
+const NAV=[...Object.keys(S),'media','users','json'],NL={media:'🖼 Media library',users:'🔐 Accounts',json:'{ } Advanced JSON'};
+async function show(k){cur=k;if(k!=='json')$('#view').dataset.k=k;$('#ttl').textContent=(S[k]?.label)||NL[k];
+ $('#nav').innerHTML=NAV.map(n=>`<button class="${n===k?'on':''}" onclick="show('${n}')">${S[n]?.label||NL[n]}</button>`).join('');
+ $('#view').innerHTML=S[k]?listView(k):await view[k]()}
+document.addEventListener('input',x=>{const f=x.target.dataset?.f;if(!f)return;const[k,i,key]=f.split('.'),fd=S[k].fields.find(z=>z.k===key);
+ L[k][i][key]=fd.t==='bool'?x.target.checked:fd.t==='number'?(x.target.value===''?'':+x.target.value):x.target.value;
+ if(fd.t==='img'){const th=x.target.closest('.img').querySelector('.th');th.style.backgroundImage=`url('${x.target.value}')`}mark(true)});
+const add=k=>{L[k].push(structuredClone(S[k].blank));mark(true);show(k)},del=(k,i)=>{if(confirm('Delete this item?')){L[k].splice(i,1);mark(true);show(k)}};
+const mv=(k,i,d)=>{const j=i+d;if(j<0||j>=L[k].length)return;[L[k][i],L[k][j]]=[L[k][j],L[k][i]];mark(true);show(k)};
+
+/* ---- uploads / library ---- */
+function upload(target){const f=document.createElement('input');f.type='file';f.accept='image/*';f.onchange=async()=>{const file=f.files[0];if(!file)return;
+ try{const r=await api('/api/admin/upload?name='+encodeURIComponent(file.name),{method:'POST',body:file});say('Uploaded ✓');
+  if(target){const[k,i,key]=target.split('.');L[k][i][key]=r.url;mark(true);show(k)}else show('media')}catch(x){say(x.message)}};f.click()}
+async function pick(target){const u=await api('/api/admin/uploads');$('#mb').innerHTML=`<b>Choose an image</b><div class="lib">${u.map(x=>`<div style="background-image:url('${e(x)}')" onclick="choose('${target}','${e(x)}')"></div>`).join('')||'<p class="note">Library is empty — use Upload.</p>'}</div><br><button class="btn g" onclick="$('#modal').style.display='none'">Close</button>`;$('#modal').style.display='grid'}
+function choose(t,u){const[k,i,key]=t.split('.');L[k][i][key]=u;mark(true);$('#modal').style.display='none';show(k)}
+async function rm(u){if(confirm('Delete this image file?')){await api('/api/admin'+u.replace('/uploads/','/uploads/'),{method:'DELETE'});show('media')}}
+async function addUser(){try{await api('/api/admin/users',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({username:$('#nu').value.trim(),password:$('#np').value,role:$('#nr').value})});say('Saved ✓');show('users')}catch(x){say(x.message)}}
+async function delUser(u){if(confirm('Remove '+u+'?'))try{await api('/api/admin/users',{method:'DELETE',headers:{'Content-Type':'application/json'},body:JSON.stringify({username:u})});show('users')}catch(x){say(x.message)}}
+
+/* ---- boot ---- */
+$('#save').onclick=async()=>{try{if(cur==='json'&&$('#raw')){try{C=JSON.parse($('#raw').value)}catch{return say('Invalid JSON')}}else flush();
+ await api('/api/admin/content',{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify(C)});mark(false);say('Published ✓ — site updated');parent!==window&&parent.postMessage('bc-saved','*')}catch(x){say(x.message)}};
+async function boot(){try{const m=await api('/api/me');C=await api('/api/admin/content');Object.keys(S).forEach(k=>L[k]=GET[k]());
+ $('#login').style.display='none';$('#app').style.display='grid';$('#who').textContent=m.username+' · '+m.role;show('settings')}catch{$('#login').style.display='grid';$('#app').style.display='none'}}
+$('#lf').onsubmit=async x=>{x.preventDefault();try{await api('/api/login',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({username:x.target.u.value,password:x.target.p.value})});boot()}catch(err){$('#le').textContent=err.message}};
+async function logout(){await api('/api/logout');location.reload()}
+boot();
+</script></body></html>

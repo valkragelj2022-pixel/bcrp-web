@@ -1,0 +1,214 @@
+{
+  "connectUrl": "fivem://connect/cfx.re/join/SOON",
+  "players": 0,
+  "maxPlayers": 64,
+  "playerApi": "",
+  "paypalEmail": "val.kragelj2010@icloud.com",
+  "purchaseWebhook": "https://discord.com/api/webhooks/1546234933541081178/ERZnHn0RL62bKITYey3Q6KqangzqFNcT-gC8uoNXqDG5-jqwIV2GiRudmXG2ztlNxeN2",
+  "purchasePingUserId": "1400616825116561520",
+  "donations": {
+    "bronze": {
+      "name": "Bronze Podpornik",
+      "price": "€9.99",
+      "period": "/ mesec",
+      "tag": "Bronze",
+      "blurb": "Vhodni nivo podpore za predane igralce.",
+      "perks": [
+        "Ekskluzivna vloga v Discordu",
+        "Dostop do prioritetnega čakanja",
+        "Ekskluzivni pack kož za vozila",
+        "Dostop do podpore v klepetu"
+      ]
+    },
+    "silver": {
+      "name": "Silver Podpornik",
+      "price": "€19.99",
+      "period": "/ mesec",
+      "tag": "Silver",
+      "blurb": "Napredni paket z več ekskluzivnimi koristmi.",
+      "perks": [
+        "Vse iz Bronza",
+        "Ekskluzivna registrska številka",
+        "Mesečni bonus v igri",
+        "Ekskluzivni oblačilni predmeti",
+        "Predogled novih funkcij"
+      ]
+    },
+    "gold": {
+      "name": "Gold Podpornik",
+      "price": "€34.99",
+      "period": "/ mesec",
+      "tag": "Gold",
+      "featured": true,
+      "blurb": "Premium paket za naše najbolj predane podpornike.",
+      "perks": [
+        "Vse iz Silver",
+        "Edinstveno vozilo Gold tier",
+        "Edinstven naslov v igri",
+        "Prioritetni support ticketi",
+        "Ekskluzivni Gold kanali v Discordu",
+        "Poudarjeno ime v igri"
+      ]
+    }
+  },
+  "peds": [
+    {
+      "id": "felix",
+      "photo": "peds/ped1.jpg",
+      "name": "Felix",
+      "price": 35,
+      "preview": "https://youtu.be/S7ddBN4NC4U",
+      "blurb": "Custom ped model, narejen po meri.",
+      "featured": false
+    },
+    {
+      "id": "jose",
+      "photo": "peds/ped2.jpg",
+      "name": "Jose",
+      "price": 35,
+      "preview": "https://youtu.be/6ZTj7JuXqv0",
+      "blurb": "Custom ped model, narejen po meri.",
+      "featured": false
+    },
+    {
+      "id": "elgario",
+      "photo": "peds/ped3.jpg",
+      "name": "Elgario",
+      "price": 35,
+      "preview": "https://youtu.be/KxDP5RPLZn8",
+      "blurb": "Custom ped model, narejen po meri.",
+      "featured": false
+    },
+    {
+      "id": "cube",
+      "photo": "peds/ped4.jpg",
+      "name": "Cube",
+      "price": 35,
+      "preview": "https://youtu.be/edqxJ7ERcJk",
+      "blurb": "Custom ped model, narejen po meri.",
+      "featured": false
+    },
+    {
+      "id": "carle",
+      "photo": "peds/ped5.jpg",
+      "name": "Carle",
+      "price": 35,
+      "preview": "https://youtu.be/ipslxSRNSCg?si=HgZ_MjbPem_nTYPJ",
+      "blurb": "Custom ped model, narejen po meri.",
+      "featured": false
+    },
+    {
+      "id": "hector",
+      "photo": "peds/ped6.jpg",
+      "name": "Hector",
+      "price": 35,
+      "preview": "https://youtu.be/HFANvNwXA0U",
+      "blurb": "Custom ped model, narejen po meri.",
+      "featured": false
+    },
+    {
+      "id": "takeo",
+      "photo": "peds/ped7.jpg",
+      "name": "Takeo",
+      "price": 35,
+      "preview": "https://youtu.be/SZWLKFlg7ks",
+      "blurb": "Custom ped model, narejen po meri.",
+      "featured": false
+    },
+    {
+      "id": "hao",
+      "photo": "peds/ped8.jpg",
+      "name": "Hao",
+      "price": 35,
+      "preview": "https://youtu.be/edqxJ7ERcJk",
+      "blurb": "Custom ped model, narejen po meri.",
+      "featured": false
+    }
+  ],
+  "mlos": [
+    {
+      "id": "custom",
+      "photo": "mlo/mlo0.jpg",
+      "name": "MLO po vaši izbiri",
+      "price": 30,
+      "range": true,
+      "min": 15,
+      "max": 80,
+      "blurb": "Sami izberite znesek med €15 in €80."
+    }
+  ],
+  "mloPerks": [
+    "Zasebna lokacija v igri",
+    "Ključi in dostop za vaš karakter",
+    "Pomoč ekipe pri postavitvi"
+  ],
+  "pedPerks": [
+    "En custom ped model",
+    "Dodan v vaš karakter",
+    "Zamenjava ob težavah z modelom"
+  ],
+  "pedsPerPage": 6,
+  "features": [
+    [
+      "",
+      "Resna vloga",
+      "Jasni standardi, Fear RP in zgodbe brez naključnih deathmatchov. Vsak lik ima razlog za to, kar počne."
+    ],
+    [
+      "",
+      "Lastni sistemi",
+      "Zaposlitve, ekonomija in interakcije, narejene za BlueCity Roleplay in redno posodobljene po povratnih informacijah igralcev."
+    ],
+    [
+      "",
+      "Skupnost, ki igra skupaj",
+      "Vsak dan aktivni igralci, ki pomagajo novincem pri prvih korakih."
+    ],
+    [
+      "",
+      "Ekipa na voljo",
+      "Moderatorji in podpora so dosegljivi prek Discorda in ticketov."
+    ]
+  ],
+  "rules": [
+    [
+      "M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20zM12 8v4M12 16h.01",
+      "Spoštuj vse",
+      "Spoštujte vse igralce in ekipo. Nadlegovanje, diskriminacija in toksičnost niso dovoljeni."
+    ],
+    [
+      "M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z",
+      "Ostani v vlogi",
+      "Vlogo menjajte le, če je nujno. Cenite immersijo drugih okoli vas."
+    ],
+    [
+      "M9 12l2 2 4-4M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20z",
+      "Brez exploitov",
+      "Zapleti, glitchi in orodja tretjih oseb, ki dajejo nepravične prednosti, so strogo prepovedana."
+    ]
+  ],
+  "staff": [
+    {
+      "name": "Darkangel",
+      "role": "Lastnik",
+      "desc": "Ustanovitelj BlueCity Roleplay",
+      "avatar": "staff-darkangel.png"
+    },
+    {
+      "name": "Skino",
+      "role": "Lastnik",
+      "desc": "Ustanovitelj BlueCity Roleplay",
+      "avatar": "staff-skino.png"
+    },
+    {
+      "name": "ZeusX",
+      "role": "Developer",
+      "desc": "Developer BlueCity Roleplay",
+      "avatar": "staff-zeus.png"
+    }
+  ],
+  "settings": {
+    "announcement": "",
+    "announcementOn": false
+  }
+}
